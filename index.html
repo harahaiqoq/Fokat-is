@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uptx Refer & Earn</title>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,700&subset=latin-ext" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Quicksand', sans-serif; background-color: #8ED302; }
+        .main-container { background: white; border-radius: 2.5rem; min-height: 95vh; margin: 10px; overflow: hidden; }
+        .btn-custom { background-color: #8ED302; border-radius: 50px; font-weight: 700; color: #000; }
+        .input-box { border: 2.5px solid #F97316; border-radius: 15px; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="flex justify-center">
+
+    <div class="main-container w-full max-w-md shadow-2xl relative">
+        
+        <div id="page1" class="p-6">
+            <h1 class="text-3xl font-bold text-center mt-4">Mobile Refer & Earn</h1>
+            
+            <div class="flex items-start mt-8 px-2">
+                <img src="https://cdn-icons-png.flaticon.com/512/1850/1850616.png" class="w-10 mr-2">
+                <p class="text-orange-500 font-bold text-[13px] leading-tight">
+                    Get ₹200 When Users Completes the Task <br> and Receive Their Reward.
+                </p>
+            </div>
+
+            <div class="mt-8 relative">
+                <img src="https://cdn-icons-png.flaticon.com/512/4213/4213958.png" class="w-20 absolute -left-4 -top-6 z-10">
+                <div class="btn-custom w-full py-5 text-2xl text-center shadow-lg relative">
+                    Rs.200/Refer
+                </div>
+            </div>
+
+            <div class="mt-12 input-box flex items-center p-3">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" class="w-10 border-r-2 border-green-600 pr-2">
+                <input type="text" id="userUpi" placeholder="Enter Your Upi Id" class="w-full pl-3 outline-none font-bold text-gray-600">
+            </div>
+
+            <div class="flex justify-center mt-8">
+                <button onclick="handleGenerate()" class="btn-custom px-16 py-3 text-lg">
+                    Generate
+                </button>
+            </div>
+        </div>
+
+        <div id="page2" class="hidden p-6 text-center animate-in fade-in zoom-in duration-300">
+            <h1 class="text-2xl font-bold mt-2">Mobile Refer & Earn</h1>
+            
+            <div class="flex justify-center mt-10">
+                <div class="bg-green-500 w-24 h-24 rounded-full flex items-center justify-center shadow-xl shadow-green-200">
+                    <i class="fas fa-check text-5xl text-white"></i>
+                </div>
+            </div>
+
+            <div class="mt-8 space-y-1">
+                <p class="font-bold text-gray-800">Refer Link for UPI id: <span id="displayUpi" class="text-green-600"></span></p>
+                <p class="font-bold text-gray-800 italic">Generated Successfully</p>
+            </div>
+
+            <div class="mt-8 input-box p-4 bg-gray-50 overflow-hidden">
+                <p id="targetLink" class="text-sm font-bold text-blue-600 truncate">
+                    </p>
+            </div>
+
+            <div class="flex justify-center mt-8">
+                <button onclick="copyLink()" class="btn-custom px-14 py-3 text-lg uppercase">
+                    Copy Link
+                </button>
+            </div>
+        </div>
+
+        <div class="p-6 bg-white border-t-8 border-[#8ED302] mt-6">
+            <h3 class="text-xl font-bold mb-6">Extra Features:</h3>
+            
+            <div class="space-y-6">
+                <div class="flex items-center gap-4 group">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1256/1256650.png" class="w-12">
+                    <div class="btn-custom flex-1 py-4 text-center cursor-pointer">Track My Referrals</div>
+                </div>
+
+                <div class="flex items-center gap-4 justify-end">
+                    <div class="btn-custom flex-1 py-4 text-center cursor-pointer">Custom Amount</div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/2040/2040523.png" class="w-14">
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3242/3242257.png" class="w-12">
+                    <div class="btn-custom flex-1 py-4 text-center cursor-pointer">Contact Support</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Aapke 2 Links
+        const links = [
+            "https://offers.fokatcash.com/camp.php?ref=TLHBG&camp=Mob",
+            "https://offers.fokatcash.com/camp.php?ref=QWPHC&camp=Mob"
+        ];
+
+        function handleGenerate() {
+            const upi = document.getElementById('userUpi').value.trim();
+            if (!upi) {
+                alert("Bhai, UPI ID toh dalo!");
+                return;
+            }
+            
+            // Randomly ek link select karna
+            const randomLink = links[Math.floor(Math.random() * links.length)];
+            
+            // UI Update karna
+            document.getElementById('displayUpi').innerText = upi;
+            document.getElementById('targetLink').innerText = randomLink;
+            
+            // Switch pages
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('page2').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function copyLink() {
+            const link = document.getElementById('targetLink').innerText.trim();
+            navigator.clipboard.writeText(link).then(() => {
+                alert("Referral Link Copied! Ab dosto ko bhejo.");
+            });
+        }
+    </script>
+</body>
+</html>
